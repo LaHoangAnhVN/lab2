@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import json
-import re
-import argparse
-from tqdm import tqdm
-
-=======
 import os
 import json
 import re
@@ -12,9 +5,8 @@ import time
 import argparse
 from tqdm import tqdm
 
-path = 'D:/python/lab.txt'
+path = '13.txt'
 
->>>>>>> f18b168 (Initial commit)
 
 class ReadFile:
     path: str
@@ -37,19 +29,12 @@ class WriteFile:
         self.path = name
 
     def write_file(self, res) -> None:
-<<<<<<< HEAD
-=======
         count = 0
->>>>>>> f18b168 (Initial commit)
         tmp = []
         for i in tqdm(range(len(res.result)), desc="File was wrote!", ncols=100):
             if not (False in res.validation(i).values()):
                 tmp.append(res.result[i].dictionary.copy())
-<<<<<<< HEAD
-        json.dump(tmp, open(self.path, "w", encoding="utf-8"), ensure_ascii=False, sort_keys=False, indent=8)
-=======
         json.dump(tmp, open(self.path, "w", encoding="windows-1251"), ensure_ascii=False, sort_keys=False, indent=4)
->>>>>>> f18b168 (Initial commit)
 
 
 class Validator:
@@ -71,19 +56,11 @@ class Validator:
         return tmp.copy()
 
     def count_valid(self) -> int:
-<<<<<<< HEAD
-        count_valid = 0
-        for i in range(len(self.result)):
-            if not (False in self.validation(i).values()):
-                count_valid += 1
-        return count_valid
-=======
         count = 0
         for i in range(len(self.result)):
             if not (False in self.validation(i).values()):
                 count += 1
         return count
->>>>>>> f18b168 (Initial commit)
 
     def count_invalid(self) -> int:
         count = 0
@@ -124,13 +101,6 @@ class Validator:
         count = 0
         for i in range(len(self.result)):
             if not self.result[i].check_uni():
-<<<<<<< HEAD
-=======
-                print(self.result[i].dictionary["university"])
-                break
-        for i in range(len(self.result)):
-            if not self.result[i].check_uni():
->>>>>>> f18b168 (Initial commit)
                 count += 1
         return count
 
@@ -170,11 +140,7 @@ class ValidatorCondition:
         self.dictionary = d.copy()
 
     def check_email(self) -> bool:
-<<<<<<< HEAD
-        pattern = r"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
-=======
         pattern = "^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
->>>>>>> f18b168 (Initial commit)
         if re.match(pattern, self.dictionary["email"]):
             return True
         return False
@@ -196,12 +162,7 @@ class ValidatorCondition:
         return False
 
     def check_uni(self) -> bool:
-<<<<<<< HEAD
-        pattern = "^.+(?:[Уу]ниверситет)|([Уу]ниверситет)|^.+([Аа]кадеми[ия])|^.+(институт)|МГУ|^.+(политех)|^.+(" \
-                  "МГТУ)|САУ|МФТИ|СПбГУ"
-=======
-        pattern = "(?:университет|Университет|академия|МГТУ|политех|МГУ|САУ|МФТИ|институт|)"
->>>>>>> f18b168 (Initial commit)
+        pattern = "^.+(?:[Уу]ниверситет)|([Уу]ниверситет)|^.+([Аа]кадеми[ия])|^.+(институт)|МГУ|^.+(политех)|^.+(МГТУ)|САУ|МФТИ|СПбГУ"
         if re.match(pattern, self.dictionary["university"]):
             return True
         return False
@@ -224,24 +185,15 @@ class ValidatorCondition:
         return False
 
     def check_address(self) -> bool:
-<<<<<<< HEAD
-        pattern = r'[а-яА-Я.\s\d-]+\s+[0-9]+$'
-=======
         pattern = "[а-яА-Я.\s\d-]+\s+[0-9]+$"
->>>>>>> f18b168 (Initial commit)
         if re.match(pattern, self.dictionary["address"]):
             return True
         return False
 
 
 parser = argparse.ArgumentParser("Input & output parser")
-<<<<<<< HEAD
-parser.add_argument("-input", type=str, help="Input path")
-parser.add_argument("-output", type=str, help="Output path")
-=======
 parser.add_argument("-input", type=str, default=path, help="Input path")
 parser.add_argument("-output", type=str, default="Output.txt", help="Output path")
->>>>>>> f18b168 (Initial commit)
 pars = parser.parse_args()
 read = ReadFile(pars.input)
 array = Validator(read.read_file())
@@ -257,8 +209,4 @@ print("Amount of invalid university: ", array.count_invalid_uni())
 print("Amount of invalid age: ", array.count_invalid_age())
 print("Amount of invalid academic degree: ", array.count_invalid_degree())
 print("Amount of invalid worldview: ", array.count_invalid_view())
-<<<<<<< HEAD
 print("Amount of invalid address: ", array.count_invalid_address())
-=======
-print("Amount of invalid address: ", array.count_invalid_address())
->>>>>>> f18b168 (Initial commit)
