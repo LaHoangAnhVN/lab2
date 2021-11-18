@@ -1,7 +1,5 @@
-import os
 import json
 import re
-import time
 import argparse
 from tqdm import tqdm
 
@@ -29,7 +27,6 @@ class WriteFile:
         self.path = name
 
     def write_file(self, res) -> None:
-        count = 0
         tmp = []
         for i in tqdm(range(len(res.result)), desc="File was wrote!", ncols=100):
             if not (False in res.validation(i).values()):
@@ -140,7 +137,7 @@ class ValidatorCondition:
         self.dictionary = d.copy()
 
     def check_email(self) -> bool:
-        pattern = "^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
+        pattern = r"^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
         if re.match(pattern, self.dictionary["email"]):
             return True
         return False
@@ -162,7 +159,8 @@ class ValidatorCondition:
         return False
 
     def check_uni(self) -> bool:
-        pattern = "^.+(?:[Уу]ниверситет)|([Уу]ниверситет)|^.+([Аа]кадеми[ия])|^.+(институт)|МГУ|^.+(политех)|^.+(МГТУ)|САУ|МФТИ|СПбГУ"
+        pattern = "^.+(?:[Уу]ниверситет)|([Уу]ниверситет)|^.+([Аа]кадеми[ия])|^.+(институт)|МГУ|^.+(политех)|^.+(" \
+                  "МГТУ)|САУ|МФТИ|СПбГУ"
         if re.match(pattern, self.dictionary["university"]):
             return True
         return False
@@ -185,7 +183,7 @@ class ValidatorCondition:
         return False
 
     def check_address(self) -> bool:
-        pattern = "[а-яА-Я.\s\d-]+\s+[0-9]+$"
+        pattern = r'[а-яА-Я.\s\d-]+\s+[0-9]+$'
         if re.match(pattern, self.dictionary["address"]):
             return True
         return False
