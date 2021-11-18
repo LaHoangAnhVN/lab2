@@ -56,11 +56,11 @@ class Validator:
         return tmp.copy()
 
     def count_valid(self) -> int:
-        count = 0
+        count_valid = 0
         for i in range(len(self.result)):
             if not (False in self.validation(i).values()):
-                count += 1
-        return count
+                count_valid += 1
+        return count_valid
 
     def count_invalid(self) -> int:
         count = 0
