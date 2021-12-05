@@ -2,6 +2,8 @@ import json
 import re
 import argparse
 from tqdm import tqdm
+import yaml
+import codecs
 
 path = '13.txt'
 
@@ -31,7 +33,7 @@ class WriteFile:
         for i in tqdm(range(len(res.result)), desc="File was wrote!", ncols=100):
             if not (False in res.validation(i).values()):
                 tmp.append(res.result[i].dictionary.copy())
-        json.dump(tmp, open(self.path, "w", encoding="windows-1251"), ensure_ascii=False, sort_keys=False, indent=4)
+        json.dump(tmp, open(self.path, "w", encoding="windows-1251"), ensure_ascii=False, sort_keys=False, indent=8)
 
 
 class Validator:
@@ -190,8 +192,8 @@ class ValidatorCondition:
 
 
 parser = argparse.ArgumentParser("Input & output parser")
-parser.add_argument("-input", type=str, default=path, help="Input path")
-parser.add_argument("-output", type=str, default="Output.txt", help="Output path")
+parser.add_argument("-input", type=str, help="Input path")
+parser.add_argument("-output", type=str, help="Output path")
 pars = parser.parse_args()
 read = ReadFile(pars.input)
 array = Validator(read.read_file())
